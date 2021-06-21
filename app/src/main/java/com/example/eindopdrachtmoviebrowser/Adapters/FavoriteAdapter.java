@@ -2,6 +2,7 @@ package com.example.eindopdrachtmoviebrowser.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,7 +119,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 viewHolder.getTitleView().setContentDescription(movie.getImdbID());
             }
             @Override
-            public void onMovieError(Error error) {}
+            public void onMovieError(Error error) {
+                Log.d(this.getClass().getSimpleName(), "could not find movie");
+            }
         });
         omdbAPIManager.getMovie(values[position], true);
     }
@@ -146,7 +149,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
             @Override
             public void onMovieError(Error error) {
-
+                Log.d(this.getClass().getSimpleName(), "could not find movie, creating new empty detail view");
                 intent.putExtra("MOVIE", new Movie(name));
                 context.startActivity(intent);
 

@@ -29,21 +29,18 @@ public class OmdbAPIManager {
         this.appContext = context;
         this.movieListener = movieListener;
         this.searchListener = searchListener;
-        // Create the RequestQueue for Volley requests
         this.queue = Volley.newRequestQueue(this.appContext);
     }
 
     public OmdbAPIManager(Context context, OmdbAPIListener movieListener) {
         this.appContext = context;
         this.movieListener = movieListener;
-        // Create the RequestQueue for Volley requests
         this.queue = Volley.newRequestQueue(this.appContext);
     }
 
     public OmdbAPIManager(Context context, MovieSearchQueryListener searchListener) {
         this.appContext = context;
         this.searchListener = searchListener;
-        // Create the RequestQueue for Volley requests
         this.queue = Volley.newRequestQueue(this.appContext);
     }
 
@@ -54,14 +51,12 @@ public class OmdbAPIManager {
 
         Log.d(this.getClass().getSimpleName(),"searching: " + url);
 
-        // Define a request with its attributes and two callback methods, one for success, the other for failure
         final JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, // Use HTTP GET to retrieve the data from the NASA API
-                url, // This is the actual URL used to retrieve the data
+                Request.Method.GET,
+                url,
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
-                    // The callback for handling the response
                     public void onResponse(JSONObject response) {
                         Log.d(LOGTAG, "Volley response: " + response.toString());
 
@@ -88,15 +83,12 @@ public class OmdbAPIManager {
                 },
                 new Response.ErrorListener() {
                     @Override
-                    // The callback for handling a transmission error
                     public void onErrorResponse(VolleyError error) {
-                        // Handle the error
                         Log.e(LOGTAG, error.getLocalizedMessage());
                         movieListener.onMovieError(new Error(error.getLocalizedMessage()));
                     }
                 }
         );
-        // Add the request that was just created to the request queue, this starts off the actual netwerk transmission
         this.queue.add(request);
     }
 
@@ -107,14 +99,12 @@ public class OmdbAPIManager {
                 "https://www.omdbapi.com/?s=" + search.replaceAll(" ", "+") + "&type=" + contentType.name() +  "&page=" + page + "&apikey=48d5b4ea";
 
 
-        // Define a request with its attributes and two callback methods, one for success, the other for failure
         final JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, // Use HTTP GET to retrieve the data from the NASA API
-                url, // This is the actual URL used to retrieve the data
+                Request.Method.GET,
+                url,
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
-                    // The callback for handling the response
                     public void onResponse(JSONObject response) {
                         Log.d(LOGTAG, "Volley response: " + response.toString());
                         String responseNotice;
@@ -138,15 +128,12 @@ public class OmdbAPIManager {
                 },
                 new Response.ErrorListener() {
                     @Override
-                    // The callback for handling a transmission error
                     public void onErrorResponse(VolleyError error) {
-                        // Handle the error
                         Log.e(LOGTAG, error.getLocalizedMessage());
                         searchListener.onResultsError(new Error(error.getLocalizedMessage()));
                     }
                 }
         );
-        // Add the request that was just created to the request queue, this starts off the actual netwerk transmission
         this.queue.add(request);
     }
 }
