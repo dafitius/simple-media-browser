@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Eindopdracht Movie Browser</string>
+    <string name="searchButton_texx">rechercher</string>
+    <string name="search">rechercher</string>
+    <string name="write_here">"Ecrire ici "</string>
+    <string name="todo">todo</string>
+    <string name="app_title">navigateur multimédia</string>
+    <string name="button_movies">films</string>
+    <string name="button_series">séries</string>
+    <string name="button_games">Jeux</string>
+    <string name="button_favorites">favoris</string>
+    <string name="my_name">David\'s</string>
+    <string name="tag_cast">Distribution</string>
+    <string name="tag_description">Description</string>
+    <string name="director">réalisateur</string>
+    <string name="writer">écrivain</string>
+    <string name="actor">acteur</string>
+    <string name="sharing_description">Regarder</string>
+</resources>
