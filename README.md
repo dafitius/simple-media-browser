@@ -13,19 +13,19 @@ Here are some screenshots of significant views in the app:
 
 <img src="screenshots/search_results.png" alt="Search Results" width="250"/>
 
-You can search for movies and media content by entering keywords in the search bar, and the app displays a list of matching results.
+> You can search for movies and media content by entering keywords in the search bar, and the app displays a list of matching results.
 
 ### Media Details
 
 <img src="screenshots/media_details.png" alt="Media Details" width="250"/>
 
-The media details screen provides information about a selected movie or media item, including its title, description, ratings, and more.
+> The media details screen provides information about a selected movie or media item, including its title, description, ratings, and more.
 
 ### Favorites list
 
 <img src="screenshots/favorites_list.png" alt="Favorites list" width="250"/>
 
-The favorites page is a dedicated section where you can manage and view their favorite movies and media content.
+> The favorites page is a dedicated section where you can manage and view their favorite movies and media content.
 
 ## OMDB API Key
 
