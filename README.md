@@ -25,7 +25,7 @@ Here are some screenshots of significant views in the app:
 
 <img src="screenshots/favorites_list.png" alt="Favorites list" width="250"/>
 
-> The favorites page is a dedicated section where you can manage and view their favorite movies and media content.
+> The favorites page is a dedicated section where you can manage and view your favorite movies and media content.
 
 ## OMDB API Key
 
