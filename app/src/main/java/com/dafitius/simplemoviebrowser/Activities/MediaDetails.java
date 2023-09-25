@@ -158,7 +158,7 @@ public class MediaDetails extends AppCompatActivity {
         Bitmap mBitmap = ((BitmapDrawable) mDrawable).getBitmap();
 
         String path = MediaStore.Images.Media.insertImage(getContentResolver(),
-                mBitmap, movie.getTitle().replaceAll(" ", "-"), "image downloaded from David's media browser");
+                mBitmap, movie.getTitle().replaceAll(" ", "-"), "image downloaded from Simple media browser");
 
         Uri uri = Uri.parse(path);
         Intent shareIntent = new Intent();
