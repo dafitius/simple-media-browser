@@ -1,4 +1,4 @@
-package com.example.eindopdrachtmoviebrowser.Activities;
+package com.dafitius.simplemoviebrowser.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,16 +18,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.eindopdrachtmoviebrowser.Adapters.CastAdapter;
-import com.example.eindopdrachtmoviebrowser.Adapters.MoviePosterAdapter;
-import com.example.eindopdrachtmoviebrowser.Movie;
-import com.example.eindopdrachtmoviebrowser.R;
+import com.dafitius.simplemoviebrowser.Adapters.CastAdapter;
+import com.dafitius.simplemoviebrowser.Adapters.MoviePosterAdapter;
+import com.dafitius.simplemoviebrowser.Models.Movie;
+import com.dafitius.simplemoviebrowser.R;
 
-import com.example.eindopdrachtmoviebrowser.Rating;
+import com.dafitius.simplemoviebrowser.Models.Rating;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
@@ -63,8 +63,6 @@ public class MediaDetails extends AppCompatActivity {
         backButton.setOnClickListener(v -> finish());
 
 
-
-
         movie = (Movie) this.getIntent().getSerializableExtra("MOVIE");
 
         shareButton = findViewById(R.id.details_button_share);
@@ -73,7 +71,7 @@ public class MediaDetails extends AppCompatActivity {
         //add favorite button
         isFavorite = checkIfFavorite();
         favoriteButton = findViewById(R.id.details_button_favorite);
-        if(isFavorite) favoriteButton.setImageResource(android.R.drawable.star_on);
+        if (isFavorite) favoriteButton.setImageResource(android.R.drawable.star_on);
         else favoriteButton.setImageResource(android.R.drawable.star_off);
 
 
@@ -82,8 +80,7 @@ public class MediaDetails extends AppCompatActivity {
                         removeFavorite(movie.getImdbID());
                         favoriteButton.setImageResource(android.R.drawable.star_off);
                         isFavorite = false;
-                    }
-                    else {
+                    } else {
                         addFavorite(movie.getImdbID());
                         favoriteButton.setImageResource(android.R.drawable.star_on);
 
@@ -91,8 +88,6 @@ public class MediaDetails extends AppCompatActivity {
                     }
                 }
         );
-
-
 
 
         //define elements
@@ -103,7 +98,8 @@ public class MediaDetails extends AppCompatActivity {
         //set elements
         Picasso.get().load(movie.getPoster()).into(poster);
         title.setText(movie.getTitle());
-        year.setText("(" + movie.getYear() + ")");
+        String year_label = "(" + movie.getYear() + ")";
+        year.setText(year_label);
 
         //add genre recyclerview
         LinearLayoutManager genreLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -118,8 +114,10 @@ public class MediaDetails extends AppCompatActivity {
         ratingRecyclerView.setAdapter(getRatingAdapter());
 
         DividerItemDecoration ratingDecoration = new DividerItemDecoration(ratingRecyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
-        Drawable divider = getResources().getDrawable(R.drawable.divider);
-        ratingDecoration.setDrawable(divider);
+        Drawable divider = ResourcesCompat.getDrawable(getResources(), R.drawable.divider, null);
+        if (divider != null) {
+            ratingDecoration.setDrawable(divider);
+        }
         ratingRecyclerView.addItemDecoration(ratingDecoration);
 
         //add cast recyclerview
@@ -152,12 +150,12 @@ public class MediaDetails extends AppCompatActivity {
         }
     }
 
-    public void shareMovie(Movie movie, Context context){
+    public void shareMovie(Movie movie, Context context) {
         ImageView siv = (ImageView) new ImageView(this);
         Picasso.get().load(movie.getPoster()).into(siv);
 
         Drawable mDrawable = siv.getDrawable();
-        Bitmap mBitmap = ((BitmapDrawable)mDrawable).getBitmap();
+        Bitmap mBitmap = ((BitmapDrawable) mDrawable).getBitmap();
 
         String path = MediaStore.Images.Media.insertImage(getContentResolver(),
                 mBitmap, movie.getTitle().replaceAll(" ", "-"), "image downloaded from David's media browser");
@@ -166,35 +164,35 @@ public class MediaDetails extends AppCompatActivity {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        shareIntent.putExtra(Intent.EXTRA_TEXT,  context.getText(R.string.sharing_description) + " " + movie.getTitle() + "!");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, context.getText(R.string.sharing_description) + " " + movie.getTitle() + "!");
         shareIntent.setType("image/*");
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        context.startActivity(Intent.createChooser(shareIntent,  "this do be kinda tricky tho"));
+        context.startActivity(Intent.createChooser(shareIntent, "Share content"));
     }
 
 
-    public RecyclerView.Adapter getGenreAdapter() {
-        return new RecyclerView.Adapter() {
+    public RecyclerView.Adapter<?> getGenreAdapter() {
+        return new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-            String[] genres = movie.getGenre();
+            final String[] genres = movie.getGenre();
 
 
+            @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
                 TextView textView = new TextView(parent.getContext());
                 textView.setPadding(4, 0, 4, 0);
 
-                View view = textView;
-
-                return new MoviePosterAdapter.ViewHolder(view, parent.getContext());
+                return new MoviePosterAdapter.ViewHolder(textView, parent.getContext());
             }
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                 TextView textView = (TextView) holder.itemView;
-                textView.setText(" " + genres[position] + " ");
-                Drawable d = getResources().getDrawable(R.drawable.border);
+                final String genre = " " + genres[position] + " ";
+                textView.setText(genre);
+                Drawable d = ResourcesCompat.getDrawable(getResources(), R.drawable.border, null);
                 textView.setBackground(d);
             }
 
@@ -205,32 +203,27 @@ public class MediaDetails extends AppCompatActivity {
         };
     }
 
-    public RecyclerView.Adapter getRatingAdapter() {
-        return new RecyclerView.Adapter() {
+    public RecyclerView.Adapter<?> getRatingAdapter() {
+        return new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-            Rating[] ratings = movie.getRatings();
+            final Rating[] ratings = movie.getRatings();
 
-
+            @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-                TextView textView = new TextView(parent.getContext());
-
-                View view = textView;
-
+                View view = new TextView(parent.getContext());
                 return new MoviePosterAdapter.ViewHolder(view, parent.getContext());
             }
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
                 TextView textView = (TextView) holder.itemView;
-                textView.setText(" " + ratings[position].toString() + " ");
+                final String rating = " " + ratings[position].toString() + " ";
+                textView.setText(rating);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 textView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                Drawable d = getResources().getDrawable(R.drawable.border);
+                Drawable d = ResourcesCompat.getDrawable(getResources(), R.drawable.border, null);
                 textView.setBackground(d);
-
             }
 
             @Override
@@ -242,12 +235,10 @@ public class MediaDetails extends AppCompatActivity {
 
     private boolean checkIfFavorite() {
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        Set<String> set = sharedpreferences.getStringSet("favo", null);
-        if(set != null) {
-            if (set.contains(movie.getImdbID())) {
-                return true;
-            } else return false;
-        } else{
+        Set<String> set = sharedpreferences.getStringSet("favorites", null);
+        if (set != null) {
+            return set.contains(movie.getImdbID());
+        } else {
             createFavorite();
             return false;
         }
@@ -260,9 +251,8 @@ public class MediaDetails extends AppCompatActivity {
 
         Set<String> set = new HashSet<>();
 
-        editor.putStringSet("favo", set);
+        editor.putStringSet("favorites", set);
         editor.clear();
-        editor.commit();
         editor.apply();
     }
 
@@ -273,20 +263,14 @@ public class MediaDetails extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         //Retrieve the values
-        Set<String> set = sharedpreferences.getStringSet("favo", null);
+        Set<String> set = new HashSet<>(sharedpreferences.getStringSet("favorites", null));
 
         //Set the values
-        if (set != null) {
-            set.add(movieId);
+        set.add(movieId);
 
-        } else{
-            set = new HashSet<>();
-            set.add(movieId);
-        }
         Log.i(this.getClass().getSimpleName(), "added " + movieId + " to the favorite movies");
-        editor.putStringSet("favo", set);
+        editor.putStringSet("favorites", set);
         editor.clear();
-        editor.commit();
         editor.apply();
     }
 
@@ -297,17 +281,15 @@ public class MediaDetails extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         //Retrieve the values
-        Set<String> set = sharedpreferences.getStringSet("favo", null);
+        Set<String> set = new HashSet<>(sharedpreferences.getStringSet("favorites", null));
 
         //Set the values
-        if (set != null && set.contains(title)) {
+        if (set.contains(title)) {
             set.remove(title);
             Log.i(this.getClass().getSimpleName(), "Removed " + title + " from the favorites");
-            editor.putStringSet("favo", set);
+            editor.putStringSet("favorites", set);
         }
         editor.clear();
-        editor.commit();
         editor.apply();
-
     }
 }

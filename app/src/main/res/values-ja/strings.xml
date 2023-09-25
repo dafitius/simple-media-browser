@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Eindopdracht Movie Browser</string>
+    <string name="app_name">Simple Movie Browser</string>
     <string name="searchButton_texx">探す</string>
     <string name="search">探す</string>
     <string name="app_title">メディアブラウザ</string>
@@ -10,7 +10,7 @@
     <string name="button_series">シリーズ</string>
     <string name="button_games">" ゲーム"</string>
     <string name="button_favorites">お気に入り</string>
-    <string name="my_name">デビッドの</string>
+    <string name="my_name">Simple</string>
     <string name="tag_cast">映画のキャスト</string>
     <string name="tag_description">説明</string>
     <string name="director">ディレクター</string>

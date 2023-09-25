@@ -1,4 +1,4 @@
-package com.example.eindopdrachtmoviebrowser.Adapters;
+package com.dafitius.simplemoviebrowser.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.eindopdrachtmoviebrowser.R;
+import com.dafitius.simplemoviebrowser.R;
 
 import java.util.ArrayList;
 
@@ -38,6 +38,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
         }
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
 
@@ -48,8 +49,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
         View castView = inflater.inflate(R.layout.cast_item, parent, false);
 
         // Return a new holder instance
-        CastAdapter.ViewHolder viewHolder = new CastAdapter.ViewHolder(castView);
-        return viewHolder;
+        return new ViewHolder(castView);
     }
 
     @Override
@@ -60,7 +60,8 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
 
 
         title.setText(titles.get(position));
-        name.setText(" " + names.get(position) + " ");
+        final String name_entry = " " + names.get(position) + " ";
+        name.setText(name_entry);
     }
 
     @Override
@@ -71,10 +72,8 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private TextView titleView;
-        private TextView nameView;
-        private Context context;
-
+        private final TextView titleView;
+        private final TextView nameView;
 
         public ViewHolder(View view) {
             super(view);
@@ -82,7 +81,6 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
 
 
             view.setOnClickListener(this);
-            this.context = context;
             titleView = (TextView) view.findViewById(R.id.castItem_text_title);
             nameView = (TextView) view.findViewById(R.id.castItem_text_name);
         }

@@ -1,4 +1,4 @@
-package com.example.eindopdrachtmoviebrowser;
+package com.dafitius.simplemoviebrowser.Models;
 
 import java.io.Serializable;
 

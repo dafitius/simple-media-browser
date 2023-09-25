@@ -1,4 +1,4 @@
-package com.example.eindopdrachtmoviebrowser.Activities;
+package com.dafitius.simplemoviebrowser.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,24 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.eindopdrachtmoviebrowser.ContentType;
-import com.example.eindopdrachtmoviebrowser.R;
+import com.dafitius.simplemoviebrowser.Models.ContentType;
+import com.dafitius.simplemoviebrowser.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import static com.example.eindopdrachtmoviebrowser.ContentType.game;
-import static com.example.eindopdrachtmoviebrowser.ContentType.movie;
-import static com.example.eindopdrachtmoviebrowser.ContentType.series;
+import static com.dafitius.simplemoviebrowser.Models.ContentType.game;
+import static com.dafitius.simplemoviebrowser.Models.ContentType.movie;
+import static com.dafitius.simplemoviebrowser.Models.ContentType.series;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button gotoSeriesButton;
-    private Button gotoMoviesButton;
-    private Button gotoGamesButton;
-
-    private FloatingActionButton favoritesButton;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +25,16 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-        gotoSeriesButton = findViewById(R.id.main_button_series);
+        Button gotoSeriesButton = findViewById(R.id.main_button_series);
         gotoSeriesButton.setOnClickListener(v -> gotoSearchActivity(series));
 
-        gotoMoviesButton = findViewById(R.id.main_button_movies);
+        Button gotoMoviesButton = findViewById(R.id.main_button_movies);
         gotoMoviesButton.setOnClickListener(v -> gotoSearchActivity(movie));
 
-        gotoGamesButton = findViewById(R.id.main_button_games);
+        Button gotoGamesButton = findViewById(R.id.main_button_games);
         gotoGamesButton.setOnClickListener(v -> gotoSearchActivity(game));
 
-        favoritesButton = findViewById(R.id.main_button_favo);
+        FloatingActionButton favoritesButton = findViewById(R.id.main_button_favo);
         favoritesButton.setOnClickListener(v -> gotoFavoritesActivity());
 
     }

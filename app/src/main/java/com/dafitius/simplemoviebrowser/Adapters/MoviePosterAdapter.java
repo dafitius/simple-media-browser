@@ -1,4 +1,4 @@
-package com.example.eindopdrachtmoviebrowser.Adapters;
+package com.dafitius.simplemoviebrowser.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,13 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.eindopdrachtmoviebrowser.Activities.MediaDetails;
-import com.example.eindopdrachtmoviebrowser.Movie;
-import com.example.eindopdrachtmoviebrowser.API.OmdbAPIListener;
-import com.example.eindopdrachtmoviebrowser.API.OmdbAPIManager;
-import com.example.eindopdrachtmoviebrowser.R;
+import com.dafitius.simplemoviebrowser.Activities.MediaDetails;
+import com.dafitius.simplemoviebrowser.Models.Movie;
+import com.dafitius.simplemoviebrowser.API.OmdbAPIListener;
+import com.dafitius.simplemoviebrowser.API.OmdbAPIManager;
+import com.dafitius.simplemoviebrowser.R;
 import com.squareup.picasso.Picasso;
 
 
@@ -24,19 +25,15 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     private final String[] values;
     private final String[] images;
     private final String[] ids;
-    LayoutInflater layoutInflater;
-
-
-
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView titleView;
-        private ImageView posterView;
-        private Context context;
+        private final TextView titleView;
+        private final ImageView posterView;
+        private final Context context;
 
 
         public ViewHolder(View view, Context context) {
@@ -59,8 +56,6 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
         @Override
         public void onClick(View v) {
-
-
             startDetailActivity(context, titleView.getText().toString(), titleView.getContentDescription().toString());
         }
     }
@@ -75,8 +70,9 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -85,8 +81,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         View posterView = inflater.inflate(R.layout.movie_poster, viewGroup, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(posterView, context);
-        return viewHolder;
+        return new ViewHolder(posterView, context);
     }
 
     // Replace the contents of a view (invoked by the layout manager)

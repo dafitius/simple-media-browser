@@ -1,4 +1,4 @@
-package com.example.eindopdrachtmoviebrowser.Adapters;
+package com.dafitius.simplemoviebrowser.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,15 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.eindopdrachtmoviebrowser.Activities.MediaDetails;
-import com.example.eindopdrachtmoviebrowser.Movie;
-import com.example.eindopdrachtmoviebrowser.API.OmdbAPIListener;
-import com.example.eindopdrachtmoviebrowser.API.OmdbAPIManager;
-import com.example.eindopdrachtmoviebrowser.R;
+import com.dafitius.simplemoviebrowser.Activities.MediaDetails;
+import com.dafitius.simplemoviebrowser.Models.Movie;
+import com.dafitius.simplemoviebrowser.API.OmdbAPIListener;
+import com.dafitius.simplemoviebrowser.API.OmdbAPIManager;
+import com.dafitius.simplemoviebrowser.R;
 import com.squareup.picasso.Picasso;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder>  {
@@ -32,10 +33,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView titleView;
-        private ImageView posterView;
-        private RecyclerView recyclerView;
-        private Context context;
+        private final TextView titleView;
+        private final ImageView posterView;
+        private final RecyclerView recyclerView;
+        private final Context context;
 
 
         public ViewHolder(View view, Context context) {
@@ -80,8 +81,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public FavoriteAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public FavoriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -90,13 +92,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         View posterView = inflater.inflate(R.layout.favorite_item, viewGroup, false);
 
         // Return a new holder instance
-        FavoriteAdapter.ViewHolder viewHolder = new FavoriteAdapter.ViewHolder(posterView, context);
-        return viewHolder;
+        return new ViewHolder(posterView, context);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(FavoriteAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull FavoriteAdapter.ViewHolder viewHolder, final int position) {
 
 
 
@@ -130,7 +131,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @Override
     public int getItemCount() {
         return values.length;
-
     }
 
 

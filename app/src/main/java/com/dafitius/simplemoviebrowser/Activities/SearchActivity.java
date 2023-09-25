@@ -1,4 +1,4 @@
-package com.example.eindopdrachtmoviebrowser.Activities;
+package com.dafitius.simplemoviebrowser.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.eindopdrachtmoviebrowser.ContentType;
-import com.example.eindopdrachtmoviebrowser.MovieSearchQuery;
-import com.example.eindopdrachtmoviebrowser.API.MovieSearchQueryListener;
-import com.example.eindopdrachtmoviebrowser.API.OmdbAPIManager;
-import com.example.eindopdrachtmoviebrowser.R;
+import com.dafitius.simplemoviebrowser.Models.ContentType;
+import com.dafitius.simplemoviebrowser.Models.MovieSearchQuery;
+import com.dafitius.simplemoviebrowser.API.MovieSearchQueryListener;
+import com.dafitius.simplemoviebrowser.API.OmdbAPIManager;
+import com.dafitius.simplemoviebrowser.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SearchActivity extends AppCompatActivity {

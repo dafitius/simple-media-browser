@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Eindopdracht Movie Browser</string>
+    <string name="app_name">Simple Movie Browser</string>
     <string name="searchButton_texx">zoek</string>
     <string name="app_title">Media browser</string>
     <string name="todo">todo</string>
@@ -10,11 +10,11 @@
     <string name="button_series">series</string>
     <string name="button_games">games</string>
     <string name="button_favorites">favorieten</string>
-    <string name="my_name">David\'s</string>
+    <string name="my_name">Simple</string>
     <string name="tag_cast">Cast</string>
     <string name="tag_description">Beschrijving</string>
     <string name="director">"regisseur "</string>
     <string name="writer">auteur</string>
     <string name="actor">acteur</string>
-    <string name="sharing_description">bekijk eens</string>
+    <string name="sharing_description">bekijk</string>
 </resources>

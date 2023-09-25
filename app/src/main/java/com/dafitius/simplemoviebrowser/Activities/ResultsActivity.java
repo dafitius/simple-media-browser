@@ -1,4 +1,4 @@
-package com.example.eindopdrachtmoviebrowser.Activities;
+package com.dafitius.simplemoviebrowser.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,13 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.eindopdrachtmoviebrowser.Adapters.MoviePosterAdapter;
-import com.example.eindopdrachtmoviebrowser.ContentType;
-import com.example.eindopdrachtmoviebrowser.MovieSearchQuery;
-import com.example.eindopdrachtmoviebrowser.API.MovieSearchQueryListener;
-import com.example.eindopdrachtmoviebrowser.API.OmdbAPIManager;
-import com.example.eindopdrachtmoviebrowser.R;
-import com.example.eindopdrachtmoviebrowser.SearchResult;
+import com.dafitius.simplemoviebrowser.Adapters.MoviePosterAdapter;
+import com.dafitius.simplemoviebrowser.Models.ContentType;
+import com.dafitius.simplemoviebrowser.Models.MovieSearchQuery;
+import com.dafitius.simplemoviebrowser.API.MovieSearchQueryListener;
+import com.dafitius.simplemoviebrowser.API.OmdbAPIManager;
+import com.dafitius.simplemoviebrowser.R;
+import com.dafitius.simplemoviebrowser.Models.SearchResult;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ResultsActivity extends AppCompatActivity {
@@ -52,7 +52,8 @@ public class ResultsActivity extends AppCompatActivity {
 
 
         counter = findViewById(R.id.results_text_counter);
-        counter.setText(page + "/" + computeAmountOfPages(results.getTotalResults()));
+        final String query = page + "/" + computeAmountOfPages(results.getTotalResults());
+        counter.setText(query);
 
         SearchResult[] searchResults = results.getSearch();
 

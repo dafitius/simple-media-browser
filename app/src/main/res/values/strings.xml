@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Eindopdracht Movie Browser</string>
+    <string name="app_name">Simple Movie Browser</string>
     <string name="searchButton_texx">search</string>
     <string name="app_title">Media browser</string>
     <string name="todo">todo</string>
@@ -9,7 +9,7 @@
     <string name="button_series">series</string>
     <string name="button_games">games</string>
     <string name="button_favorites">favorites</string>
-    <string name="my_name" >David\'s</string>
+    <string name="my_name" >Simple</string>
     <string name="tag_cast">Cast</string>
     <string name="tag_description">Description</string>
     <string name="director">director</string>
